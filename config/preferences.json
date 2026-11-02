@@ -1,0 +1,203 @@
+{
+  "_note": "Edit from the dashboard (Preferences tab) or directly here. null = not set yet / no limit.",
+  "target_field": "Audit / Accounting",
+  "markets": {
+    "USA": {
+      "enabled": false,
+      "country": "United States",
+      "preferred_locations": [
+        "Seattle, Washington"
+      ],
+      "consider_other_locations": false,
+      "currency": "USD",
+      "salary_min_annual": 80000,
+      "salary_max_annual": null,
+      "requires_visa_sponsorship": true,
+      "platforms": {
+        "LinkedIn": true,
+        "Indeed": true,
+        "Glassdoor": true,
+        "Workday": true,
+        "Greenhouse": true,
+        "Lever": true
+      },
+      "on_hold": true
+    },
+    "India": {
+      "enabled": true,
+      "country": "India",
+      "preferred_locations": [
+        "Mumbai"
+      ],
+      "consider_other_locations": false,
+      "currency": "INR",
+      "salary_min_annual": 360000,
+      "salary_max_annual": null,
+      "requires_visa_sponsorship": false,
+      "platforms": {
+        "Naukri": true,
+        "LinkedIn": true,
+        "Indeed India": true,
+        "Foundit": true,
+        "Workday": true,
+        "Greenhouse": true,
+        "Lever": true
+      },
+      "location_aliases": [
+        "Mumbai",
+        "Navi Mumbai",
+        "Thane",
+        "Mumbai Suburban",
+        "Andheri",
+        "Bandra",
+        "BKC",
+        "Lower Parel",
+        "Powai",
+        "Goregaon",
+        "Malad",
+        "Borivali",
+        "Vikhroli",
+        "Kurla",
+        "Worli",
+        "Nariman Point",
+        "Fort"
+      ],
+      "salary_note": "Applies to all candidates unless a candidate profile sets its own minimum CTC."
+    }
+  },
+  "employment_type": {
+    "Full-time": true,
+    "Part-time": false,
+    "Contract": false,
+    "Internship": false
+  },
+  "experience_levels": {
+    "Fresher (0-1 years)": true,
+    "Entry Level": true,
+    "Associate": true,
+    "1-3 Years": true,
+    "3-5 Years": true,
+    "5+ Years": true
+  },
+  "use_actual_job_requirements_for_experience": true,
+  "work_arrangement": {
+    "On-site": true,
+    "Hybrid": true,
+    "Remote": true
+  },
+  "salary_rules": {
+    "if_not_disclosed": "consider",
+    "if_range_overlaps_minimum": "consider",
+    "if_maximum_below_minimum": "reject",
+    "convert_hourly_to_annual": true,
+    "hours_per_year": 2080,
+    "convert_monthly_to_annual": true
+  },
+  "posting_age": {
+    "tiers": [
+      {
+        "name": "Priority 1",
+        "max_days": 7
+      },
+      {
+        "name": "Priority 2",
+        "max_days": 14
+      },
+      {
+        "name": "Priority 3",
+        "max_days": 26
+      }
+    ],
+    "reject_older_than_days": 26
+  },
+  "visa_sponsorship_usa": {
+    "positive_signals": [
+      "H-1B sponsorship",
+      "visa sponsorship available",
+      "will sponsor",
+      "sponsorship provided",
+      "sponsorship considered on a case-by-case basis",
+      "open to sponsoring",
+      "OPT",
+      "CPT",
+      "STEM OPT"
+    ],
+    "negative_signals": [
+      "US citizenship required",
+      "must be a US citizen",
+      "green card required",
+      "permanent resident",
+      "sponsorship is not available",
+      "unable to sponsor",
+      "will not sponsor",
+      "no sponsorship",
+      "must be authorized to work in the US without sponsorship",
+      "unrestricted work authorization"
+    ],
+    "unclear_status": "Unknown",
+    "opt_cpt_is_not_h1b": true
+  },
+  "companies": {
+    "include_types": [
+      "Big Four accounting firms",
+      "Mid-tier accounting firms",
+      "Regional accounting firms",
+      "Public companies",
+      "Private companies",
+      "Financial institutions",
+      "Consulting firms",
+      "Other organisations with relevant audit or accounting roles"
+    ],
+    "exclude_signals": [
+      "unpaid",
+      "commission only",
+      "commission-only",
+      "MLM",
+      "multi-level marketing",
+      "registration fee",
+      "application fee",
+      "security deposit",
+      "pay to apply",
+      "processing fee"
+    ],
+    "blocked_companies": []
+  },
+  "run": {
+    "max_applications_per_run": null,
+    "auto_submit": false,
+    "max_pages_per_search": 3,
+    "review_tabs_open_at_once": 15,
+    "slow_mode_seconds": [
+      2,
+      5
+    ],
+    "_run_note": "review_tabs_open_at_once = how many prepared applications are kept open for you at a time; more are prepared as you finish."
+  },
+  "experience_rule": "Match each job against the selected candidate's own experience (from the CV), not a fixed level. Levels above are only allowed ranges.",
+  "matching": {
+    "min_score": 55,
+    "_note": "Jobs at or above this score are prepared automatically; below it they wait in 'Under Review'."
+  },
+  "search_keywords": {
+    "experienced": [
+      "Audit Executive",
+      "Statutory Audit",
+      "Internal Audit",
+      "Audit Associate",
+      "Accountant",
+      "Accounts Executive",
+      "Finance and Accounts",
+      "GST Executive"
+    ],
+    "fresher": [
+      "Accountant Fresher",
+      "Junior Accountant",
+      "Audit Assistant",
+      "Accounts Assistant",
+      "Tally Accountant",
+      "Trainee Accountant"
+    ]
+  },
+  "india_platforms_note": "Naukri and Foundit apply in one click, so for them the tool opens the job with answers ready and you press Apply.",
+  "company_career_pages": []
+}

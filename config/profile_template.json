@@ -1,0 +1,44 @@
+{
+  "_note": "Blank profile for a new candidate. Real profiles live in data/candidates/<id>/profile.json (local only). Values are only taken from the CV or typed by you - never guessed.",
+  "display_name": "",
+  "confirmed": false,
+  "active_resume": null,
+  "cv_source": "",
+  "personal": {
+    "full_name": "",
+    "email": "",
+    "phone": "",
+    "current_city": "",
+    "linkedin_url": "",
+    "date_of_birth": ""
+  },
+  "summary": "",
+  "education": [],
+  "qualifications": [],
+  "total_experience_years": null,
+  "experience": [],
+  "skills": [],
+  "software": [],
+  "achievements": [],
+  "india_application_fields": {
+    "preferred_locations": "",
+    "current_ctc_annual_inr": null,
+    "expected_ctc_annual_inr": null,
+    "minimum_ctc_annual_inr": null,
+    "notice_period_days": null,
+    "willing_to_relocate": null
+  },
+  "work_authorization": {
+    "USA": {
+      "authorized_to_work_without_sponsorship": null,
+      "require_sponsorship_now_or_future": null,
+      "current_visa_status": "",
+      "notes": ""
+    },
+    "India": {
+      "authorized_to_work_in_india": null
+    }
+  },
+  "answer_style_sample": "My experience in statutory audit and accounting has given me a good base in financial reporting and audit procedures. I am interested in this role because it would let me build on that experience with a larger team.",
+  "owner": ""
+}

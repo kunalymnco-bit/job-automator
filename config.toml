@@ -1,0 +1,10 @@
+[server]
+headless = true
+maxUploadSize = 15
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "viewer"     # hides developer menus / Deploy button from website users
+showErrorDetails = false

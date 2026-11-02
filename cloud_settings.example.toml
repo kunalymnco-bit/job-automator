@@ -1,0 +1,5 @@
+# Copy this file to  cloud_settings.toml  (same folder) on the PC that runs the worker,
+# and paste your Supabase connection string (Session pooler) between the quotes.
+# The PC then uses the SAME data as the online website.
+# Never upload cloud_settings.toml to GitHub (it is already in .gitignore).
+DATABASE_URL = "postgresql://postgres.xxxxxxxx:YOUR-DB-PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres"

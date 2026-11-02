@@ -1,0 +1,7 @@
+data/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+cloud_settings.toml
+.streamlit/secrets.toml

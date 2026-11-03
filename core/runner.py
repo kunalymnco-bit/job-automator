@@ -73,6 +73,11 @@ async def launch_browser(pw, cid, log):
         try:
             ctx = await pw.chromium.launch_persistent_context(**({**opts, "channel": channel} if channel else opts))
             log(f"Browser opened ({channel or 'built-in Chromium'}). Keep this window open while the run works.")
+            try:                                     # a permanent first tab, so closing other tabs never closes the browser
+                first = ctx.pages[0] if ctx.pages else await ctx.new_page()
+                await first.goto(CONTROL_PAGE)
+            except Exception:
+                pass
             return ctx
         except Exception as e:
             last = e
@@ -118,10 +123,15 @@ async def login_all(ctx, adapters, cid, log, minutes=4):
             if not waiting:
                 break
             await asyncio.sleep(5)
+            if browser_closed(ctx):
+                log("The browser window was closed before the logins were finished. Start 'Log in to job sites' "
+                    "again and log in inside the tabs - please do not close the browser.", "WARN")
+                break
             for name, (a, page) in list(waiting.items()):
                 try:
                     if page.is_closed():
                         waiting.pop(name)
+                        log(f"{name}: the login tab was closed before logging in.", "WARN")
                         continue
                     if a.login_done(page.url):
                         await asyncio.sleep(2)
@@ -143,6 +153,18 @@ async def login_all(ctx, adapters, cid, log, minutes=4):
         saved[k] = {"logged_in": v, "checked": db.now()}
     db.kv_set(f"logins:{cid}", saved)
     return status
+
+
+def browser_closed(ctx):
+    try:
+        return not ctx.pages
+    except Exception:
+        return True
+
+
+CONTROL_PAGE = """data:text/html,<html><body style='font:16px Segoe UI,Arial;padding:40px;background:%231F3864;color:white'>
+<h2>Job Application Automator</h2><p>This window is used by the tool. <b>Keep it open</b> while a run is working.</p>
+<p>Log in / review in the other tabs. Close this window only when the run is finished.</p></body></html>"""
 
 
 def adapters_for(prefs):
@@ -212,6 +234,9 @@ async def main(cid, run_id, search_only=False, login_only=False, only_api=False)
             if getattr(a, "login_url", None) and not status.get(a.name):
                 log(f"{a.name}: skipped this run (not logged in). Use 'Log in to job sites' on the dashboard.", "WARN")
                 continue
+            if a.needs_browser and ctx is not None and browser_closed(ctx):
+                log("Browser was closed - stopping this run.", "WARN")
+                break
             try:
                 if a.needs_browser and not getattr(a, "login_url", None) and not await a.ensure_ready(ctx, log):
                     continue

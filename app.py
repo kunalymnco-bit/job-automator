@@ -419,7 +419,7 @@ with tab_dash:
     login = l1.button("Log in to job sites (first time)", disabled=bool(running), key=U + "login")
     from core.runner import load_login_status
     ls = load_login_status(active)
-    india_on = [k for k, v in prefs["markets"]["India"]["platforms"].items() if v and k in ("LinkedIn", "Naukri", "Foundit")]
+    india_on = [k for k, v in prefs["markets"]["India"]["platforms"].items() if v and k in ("LinkedIn", "Naukri", "Indeed India", "Foundit")]
     chips = []
     for k in india_on:
         v = ls.get(k)

@@ -181,6 +181,20 @@ async def _page_root(page):
     return page
 
 
+async def _shows_login_button(page):
+    """True if the page shows a 'Login' / 'Sign in' link or button (= not logged in)."""
+    pat = re.compile(r"^\s*(log ?in|sign ?in|log ?in\s*.\s*register)\s*$", re.I)
+    try:
+        for role in ("link", "button"):
+            loc = page.get_by_role(role, name=pat)
+            for i in range(min(await loc.count(), 5)):
+                if await loc.nth(i).is_visible():
+                    return True
+    except Exception:
+        pass
+    return False
+
+
 async def _button_says_applied(page, selector):
     try:
         loc = page.locator(selector)
@@ -343,6 +357,16 @@ class IndeedIndia(PlatformAdapter):
     name = "Indeed India"
     apply_mode = "fill"
     HOST = "https://in.indeed.com"
+    login_url = "https://secure.indeed.com/auth?hl=en_IN&co=IN&continue=https%3A%2F%2Fin.indeed.com%2F"
+
+    @staticmethod
+    def login_done(url):
+        return "indeed.com" in url and not re.search(r"secure\.indeed\.com/(auth|account/login)|/auth\b|otp|passcode", url)
+
+    async def _logged_in(self, page):
+        await _goto(page, self.HOST, lambda *a: None)
+        await asyncio.sleep(2)
+        return "indeed.com" in page.url and not await _shows_login_button(page)
 
     async def ensure_ready(self, ctx, log):
         page = await ctx.new_page()
@@ -450,9 +474,9 @@ class Foundit(PlatformAdapter):
         return "foundit.in" in url and not re.search(r"login|otp|register|signup", url)
 
     async def _logged_in(self, page):
-        if "foundit.in" not in page.url:
-            await _goto(page, "https://www.foundit.in/seeker/dashboard", lambda *a: None)
-        return "foundit.in" in page.url and "login" not in page.url
+        await _goto(page, "https://www.foundit.in/", lambda *a: None)
+        await asyncio.sleep(2)
+        return "foundit.in" in page.url and "login" not in page.url and not await _shows_login_button(page)
 
     async def ensure_ready(self, ctx, log):
         page = await ctx.new_page()
